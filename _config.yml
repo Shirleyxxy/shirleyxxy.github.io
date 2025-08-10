@@ -1,0 +1,24 @@
+title: "Welcome to Shirley's blog!"
+description: "Hi there, I am Shirley, a software engineer based in New York City. This is a place where I write, document my random thoughts, and keep my learning notes."
+url: https://shirleyxxy.github.io
+lang: en
+timezone: America/New_York
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: post }
+
+author:
+  name: "Shirley Xu"
+
+# These URLs will be picked up by jekyll-seo-tag for rich cards
+social:
+  name: "Shirley"
+  links:
+    - "https://www.linkedin.com/in/shirleyxxy"
+    - "https://www.instagram.com/wakeupshirleyy/"
