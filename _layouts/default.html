@@ -12,15 +12,21 @@
 <body>
   <div class="container">
     <header class="site">
-      <div class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
-      <div class="site-desc">{{ site.description }}</div>
-      <nav class="top">
+    <div class="topbar">
+        <div class="brand">
+            <a href="{{ '/' | relative_url }}">{{ site.brand | default: site.title }}</a>
+        </div> 
+        <nav class="main-nav">
         <a href="{{ '/posts/' | relative_url }}">Posts</a>
-        <!-- Optional: add socials
-        <a href="https://www.linkedin.com/in/shirleyxxy/" target="_blank" rel="me noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/shirleyxxy" target="_blank" rel="me noopener">LinkedIn</a>
         <a href="https://www.instagram.com/wakeupshirleyy/" target="_blank" rel="me noopener">Instagram</a>
-        -->
-      </nav>
+        </nav>
+    </div>
+
+    <div class="hero">
+        <h1 class="hero-title">{{ site.title }}</h1>
+        <p class="hero-desc">{{ site.description }}</p>
+    </div>
     </header>
     <main>
       {{ content }}

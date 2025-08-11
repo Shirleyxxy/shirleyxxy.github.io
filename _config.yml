@@ -16,6 +16,8 @@ defaults:
 author:
   name: "Shirley Xu"
 
+brand: "Shirley's blog"
+
 # These URLs will be picked up by jekyll-seo-tag for rich cards
 social:
   name: "Shirley"
