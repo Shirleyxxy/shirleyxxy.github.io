@@ -2,7 +2,12 @@
   --bg:#fff; --fg:#0f172a; --muted:#64748b; --border:#e2e8f0; --link:#0ea5e9; --maxw:760px;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#0b1220; --fg:#e5e7eb; --muted:#94a3b8; --border:#1f2937; --link:#38bdf8; }
+  :root{ 
+    --bg:#1a1a1a; 
+    --fg:#e6e8eb; 
+    --muted:#a8b0ba; 
+    --border:#262626; 
+    --link:#38bdf8; }
 }
 *{box-sizing:border-box}
 html,body{height:100%}
