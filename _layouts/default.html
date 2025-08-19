@@ -3,14 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% assign sitename = site.brand | default: site.title %}
-<title>
-  {% if page.title and page.url != '/' %}
-    🍵 {{ page.title }} | {{ sitename }}
-  {% else %}
-    🍵 {{ sitename }}
-  {% endif %}
-</title>
+{% assign sitename = site.brand | default: site.title %}
+{% assign symbol  = site.brand_emoji | default: "🍵" %}
+<title>{{ symbol }} {{ sitename }}</title>
+
 
   <meta name="description" content="{{ site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">

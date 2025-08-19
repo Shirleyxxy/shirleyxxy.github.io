@@ -17,6 +17,7 @@ author:
   name: "Shirley Xu"
 
 brand: "Shirley's blog"
+brand_emoji: "🍵"
 
 # These URLs will be picked up by jekyll-seo-tag for rich cards
 social:
