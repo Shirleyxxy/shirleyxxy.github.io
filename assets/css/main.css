@@ -34,9 +34,11 @@ header.site { padding: 32px 0 16px; border-bottom: 1px solid var(--border); marg
 }
 
 /* Main nav (right side) */
-.main-nav{ display:flex; gap:18px; }
-.main-nav a{ color:inherit; text-decoration:none; font-size:.98rem; }
-.main-nav a:hover{ text-decoration:underline; text-underline-offset:3px; }
+.main-nav { display:flex; gap:18px; align-items:center; }
+.main-nav a.icon { display:inline-flex; align-items:center; line-height:1; }
+.main-nav a.icon svg { display:block; opacity:.9; }
+.main-nav a.icon:hover svg { opacity:1; }
+.main-nav a.icon:hover { text-decoration:none; } /* no underline on icons */
 
 /* Hero */
 .hero-title{

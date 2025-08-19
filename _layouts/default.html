@@ -20,10 +20,27 @@
         <div class="brand">
             <a href="{{ '/' | relative_url }}">{{ site.brand | default: site.title }}</a>
         </div> 
+        
         <nav class="main-nav">
-        <a href="{{ '/posts/' | relative_url }}">Posts</a>
-        <a href="https://www.linkedin.com/in/shirleyxxy" target="_blank" rel="me noopener">LinkedIn</a>
-        <a href="https://www.instagram.com/wakeupshirleyy/" target="_blank" rel="me noopener">Instagram</a>
+          <!-- LinkedIn -->
+          <a class="icon" href="https://www.linkedin.com/in/shirleyxxy"
+            target="_blank" rel="me noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="currentColor"
+                d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5.001zM3 9h4v12H3zM14.5 9c-2.21 0-3.5 1.204-3.5 2.86V21h4v-6.5c0-.91.74-1.65 1.65-1.65S18 13.59 18 14.5V21h4v-7.5C22 10.57 20.43 9 18.15 9c-1.29 0-2.37.61-2.95 1.55H15l-.12-1.55H11z"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a class="icon" href="https://www.instagram.com/wakeupshirleyy/"
+            target="_blank" rel="me noopener" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2"
+                d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
+              <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+            </svg>
+          </a>
         </nav>
     </div>
 
