@@ -49,10 +49,12 @@
         </nav>
       </div>
 
+    {% if page.url == "/" or page.layout == "home" %}
       <div class="hero">
         <h1 class="hero-title">{{ site.title }}</h1>
         <p class="hero-desc">{{ site.description }}</p>
       </div>
+    {% endif %}
     </header>
     <main>
       {{ content }}
