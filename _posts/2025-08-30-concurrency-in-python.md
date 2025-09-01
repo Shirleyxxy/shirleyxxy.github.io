@@ -85,3 +85,86 @@ with ThreadPoolExecutor() as executor:
 
 
 ## Examples
+
+### I/O-Bound Example (API calls)
+Imagine we want to fetch data from multiple APIs, where the bottleneck is waiting for the response.
+
+#### Using `async/await (asyncio)`
+
+```python
+import asyncio
+import random
+
+async def fetch_data(name):
+    delay = random.uniform(0.5, 2.0)
+    await asyncio.sleep(delay)   # non-blocking
+    print(f"{name} finished after {delay:.2f}s")
+    return name
+
+async def main():
+    tasks = [fetch_data(f"task{i}") for i in range(5)]
+    results = await asyncio.gather(*tasks)
+    print("Results:", results)
+
+asyncio.run(main())
+```
+
+**Behavior:**
+- All tasks start nearly at the same time.
+- The event loop pauses each coroutine at `await asyncio.sleep` and switches to others.
+- Total runtime ≈ longest single task (not sum of delays).
+
+
+#### Using `concurrent.futures.ThreadPoolExecutor`
+
+```python
+import time
+import random
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+def fetch_data(name):
+    delay = random.uniform(0.5, 2.0)
+    time.sleep(delay)  # blocking
+    print(f"{name} finished after {delay:.2f}s")
+    return name
+
+with ThreadPoolExecutor() as executor:
+    futures = [executor.submit(fetch_data, f"task{i}") for i in range(5)]
+    results = [f.result() for f in as_completed(futures)]
+    print("Results:", results)
+```
+
+**Behavior:**
+- Threads allow blocking functions (`time.sleep`) to run in parallel.
+- Total runtime ≈ longest single task (like `asyncio`).
+- Overhead: more memory and thread context switching compared to async coroutines.
+
+
+### CPU-Bound Example (Fibonacci)
+Now imagine computing Fibonacci numbers (heavy CPU work), `async/await` is a bad fit.
+
+#### Using `concurrent.futures.ProcessPoolExecutor` (best fit)
+
+```python
+from concurrent.futures import ProcessPoolExecutor, as_completed
+
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n-1) + fib(n-2)
+
+with ProcessPoolExecutor() as executor:
+    futures = [executor.submit(fib, n) for n in (35, 36, 37)]
+    results = [f.result() for f in as_completed(futures)]
+    print("Results:", results)
+```
+
+**Behavior:**
+- Each Fibonacci computation runs in its own process.
+- Processes bypass the GIL, so Python can truly use multiple cores.
+- Runtime ≈ longest task, not sum.
+
+### 🔑 Takeaways
+- **I/O-bound tasks** → `asyncio` is very efficient if libraries support async.
+- **CPU-bound tasks** → `ProcessPoolExecutor` is the correct tool.
+- **Blocking libraries** → `ThreadPoolExecutor` works if you can’t use async.
