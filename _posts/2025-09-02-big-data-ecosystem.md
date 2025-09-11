@@ -28,13 +28,42 @@ Think of S3 as an infinite hard drive in the cloud — you can dump raw files in
 
 ## Hive vs. S3
 
-| Feature      | **Hive**                                                                 | **S3**                                                        |
-| ------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| **Type**     | Data warehouse / query engine (metadata + SQL interface)                 | Object storage service                                        |
-| **Storage**  | Does not store data itself, but uses HDFS, S3, or other storage backends | Stores raw files (CSV, Parquet, JSON, ORC, etc.) as objects   |
-| **Querying** | SQL-like queries via HiveQL                                              | Cannot query directly (needs Athena, Presto, or Spark)        |
-| **Schema**   | Provides schema on top of raw files (“schema on read”)                   | Schema-less — just stores files                               |
-| **Use case** | Structured queries, analytics on big data                                | Durable, scalable storage of raw/unstructured/structured data |
+<table style="width:100%;border-collapse:collapse;border-spacing:0;margin:1rem 0;">
+  <thead>
+    <tr>
+      <th style="padding:6px 13px;border:1px solid var(--border);text-align:left;background:rgba(240,246,252,.05);">Feature</th>
+      <th style="padding:6px 13px;border:1px solid var(--border);text-align:left;background:rgba(240,246,252,.05);">Hive</th>
+      <th style="padding:6px 13px;border:1px solid var(--border);text-align:left;background:rgba(240,246,252,.05);">S3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:6px 13px;border:1px solid var(--border);font-weight:600;">Type</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Data warehouse / query engine (metadata + SQL interface)</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Object storage service</td>
+    </tr>
+    <tr>
+      <td style="padding:6px 13px;border:1px solid var(--border);font-weight:600;">Storage</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Does not store data itself; uses HDFS, S3, or other storage backends</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Stores raw files (CSV, Parquet, JSON, ORC, etc.) as objects</td>
+    </tr>
+    <tr>
+      <td style="padding:6px 13px;border:1px solid var(--border);font-weight:600;">Querying</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">SQL-like queries via HiveQL</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Cannot query directly (needs Athena, Presto, or Spark)</td>
+    </tr>
+    <tr>
+      <td style="padding:6px 13px;border:1px solid var(--border);font-weight:600;">Schema</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Provides schema on top of raw files (“schema on read”)</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Schema-less — just stores files</td>
+    </tr>
+    <tr>
+      <td style="padding:6px 13px;border:1px solid var(--border);font-weight:600;">Use case</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Structured queries; analytics on big data</td>
+      <td style="padding:6px 13px;border:1px solid var(--border);">Durable, scalable storage of raw/unstructured/structured data</td>
+    </tr>
+  </tbody>
+</table>
 
 
 You can actually store Hive tables in S3. The data lives in S3, and Hive just defines the schema and provides the SQL query interface.
