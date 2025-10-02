@@ -25,3 +25,10 @@ social:
   links:
     - "https://www.linkedin.com/in/shirleyxxy"
     - "https://www.instagram.com/wakeupshirleyy/"
+
+theme: minima
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

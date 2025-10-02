@@ -269,9 +269,88 @@ pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
 }
 
-pre {
-  background: rgba(148, 163, 184, .12);
-  padding: 12px;
+/* Unified block code styling */
+.highlight,
+.highlight pre,
+.highlight pre code { background: transparent; padding: 0; border: 0; box-shadow: none; }
+
+/* single-layer background so corners are perfect */
+.highlight {
+  margin: .75rem 0;
+  background: var(--code-bg, #f6f8fa);
+  color: var(--code-fg, #24292e);
+  border: 1px solid var(--code-border, #e5e7eb);
   border-radius: 12px;
-  overflow: auto
+  overflow: hidden;           /* clip inner content to the rounded corners */
 }
+.highlight pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow: auto;
+  background: transparent;    /* <-- key: no second background layer */
+  color: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .95rem;
+  line-height: 1.55;
+  tab-size: 2;
+  border-radius: 0;           /* not needed anymore */
+  background-clip: padding-box;
+}
+
+/* dark mode keeps using the vars you already set */
+html[data-theme='dark'] .highlight {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border-color: var(--code-border);
+}
+
+.highlight pre code { background: transparent; }
+
+/* Inline code — scope to inline only (not inside pre) */
+:not(pre) > code {
+  background: #f6f8fa;
+  color: #222;
+  border: 1px solid #e5e7eb;
+  border-radius: .4rem;
+  padding: .1em .35em;
+}
+
+/* Dark mode overrides */
+html[data-theme='dark'] {
+  --code-bg:     #0d1117;
+  --code-fg:     #c9d1d9;
+  --code-border: #30363d;
+}
+html[data-theme='dark'] .highlight { border-color: var(--code-border); }
+html[data-theme='dark'] .highlight pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+}
+
+/* Inline code pills in dark mode */
+html[data-theme='dark'] :not(pre) > code {
+  background: #161b22;
+  color: #c9d1d9;
+  border-color: #30363d;
+}
+
+/* Token colors (dark) — keep/tweak to taste */
+html[data-theme='dark'] .highlight .c  { color:#8b949e; font-style:italic; }
+html[data-theme='dark'] .highlight .k,
+html[data-theme='dark'] .highlight .o  { color:#ff7b72; }
+html[data-theme='dark'] .highlight .nb,
+html[data-theme='dark'] .highlight .nf,
+html[data-theme='dark'] .highlight .nc  { color:#d2a8ff; }
+html[data-theme='dark'] .highlight .nt,
+html[data-theme='dark'] .highlight .nn  { color:#7ee787; }
+html[data-theme='dark'] .highlight .na  { color:#79c0ff; }
+html[data-theme='dark'] .highlight .s,
+html[data-theme='dark'] .highlight .sb,
+html[data-theme='dark'] .highlight .s1,
+html[data-theme='dark'] .highlight .s2  { color:#a5d6ff; }
+html[data-theme='dark'] .highlight .m,
+html[data-theme='dark'] .highlight .mi,
+html[data-theme='dark'] .highlight .mh,
+html[data-theme='dark'] .highlight .il,
+html[data-theme='dark'] .highlight .mo  { color:#79c0ff; }
+html[data-theme='dark'] .highlight .err { color:#ffdcd7; background:#67060c; }
