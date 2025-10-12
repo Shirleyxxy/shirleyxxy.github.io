@@ -359,21 +359,20 @@ html[data-theme='dark'] .highlight .err { color:#ffdcd7; background:#67060c; }
 /* Let browsers harmonize built-ins with both themes */
 html, body { color-scheme: light dark; }
 
-/* ---- Table tokens (light defaults) ---- */
+/* ===== TABLE DESIGN TOKENS ===== */
 :root {
+  /* Light defaults */
   --tbl-bg:        var(--bg);
   --tbl-head-bg:   #f6f8fb;
   --tbl-row-alt:   #fafbfe;
   --tbl-text:      var(--fg);
   --tbl-muted:     var(--muted);
   --tbl-border:    var(--border);
-
-  /* inline code chips used inside table cells */
   --tbl-chip-bg:     #f6f8fa;
   --tbl-chip-border: #e5e7eb;
 }
 
-/* ---- Dark overrides (you already toggle html[data-theme='dark']) ---- */
+/* Dark theme overrides */
 html[data-theme='dark'] {
   --tbl-bg:        #0f1115;
   --tbl-head-bg:   #171a21;
@@ -381,30 +380,43 @@ html[data-theme='dark'] {
   --tbl-text:      #e6e9ef;
   --tbl-muted:     #b2b8c2;
   --tbl-border:    #2a2f3a;
-
   --tbl-chip-bg:     #1b1f28;
   --tbl-chip-border: #2b3240;
 }
 
-/* ---- Table styling (scoped to post content) ---- */
+/* ===== TABLE STYLING ===== */
 article.post table {
   width: 100%;
-  border-collapse: separate;   /* preserves rounded corners */
+  border-collapse: separate;
   border-spacing: 0;
   background: var(--tbl-bg);
   color: var(--tbl-text);
   border: 1px solid var(--tbl-border);
   border-radius: 10px;
-  overflow: hidden;            /* clip header radius */
+  overflow: hidden;
+  margin: 1.5rem 0;
+  font-size: 0.98rem;
 }
 
+/* Header */
 article.post thead th {
   background: var(--tbl-head-bg);
   color: var(--tbl-text);
   font-weight: 600;
   border-bottom: 1px solid var(--tbl-border);
+  text-align: left;
+  padding: 12px 16px;
 }
 
+/* Rounded corners for header row */
+article.post thead th:first-child {
+  border-top-left-radius: 10px;
+}
+article.post thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Table body cells */
 article.post th,
 article.post td {
   padding: 12px 16px;
@@ -412,10 +424,22 @@ article.post td {
   vertical-align: top;
 }
 
-article.post tbody tr:nth-child(even) { background: var(--tbl-row-alt); }
-article.post tbody tr:hover { background: rgba(255,255,255,0.03); } /* subtle; fine in light too */
+/* Zebra striping and hover */
+article.post tbody tr:nth-child(even) {
+  background: var(--tbl-row-alt);
+}
 
-/* Inline code chips inside tables */
+article.post tbody tr:hover {
+  background: rgba(255,255,255,0.05); /* subtle hover in both themes */
+  transition: background-color 0.2s ease;
+}
+
+/* Remove bottom border on last row */
+article.post tr:last-child td {
+  border-bottom: none;
+}
+
+/* Inline code or kbd inside tables */
 article.post td code,
 article.post th code,
 article.post td kbd,
@@ -424,11 +448,20 @@ article.post th kbd {
   color: var(--tbl-text);
   border: 1px solid var(--tbl-chip-border);
   border-radius: 6px;
-  padding: .1em .35em;
+  padding: .15em .4em;
   font-size: .92em;
 }
 
-/* Optional: de-emphasize small text inside tables */
-article.post table small,
-article.post table .muted { color: var(--tbl-muted); }
+/* Optional caption styling */
+article.post caption {
+  padding: 0.5em 0.75em;
+  font-weight: 600;
+  text-align: left;
+  color: var(--tbl-muted);
+}
 
+/* Muted small text inside tables */
+article.post table small,
+article.post table .muted {
+  color: var(--tbl-muted);
+}
