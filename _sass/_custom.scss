@@ -354,3 +354,81 @@ html[data-theme='dark'] .highlight .mh,
 html[data-theme='dark'] .highlight .il,
 html[data-theme='dark'] .highlight .mo  { color:#79c0ff; }
 html[data-theme='dark'] .highlight .err { color:#ffdcd7; background:#67060c; }
+
+
+/* Let browsers harmonize built-ins with both themes */
+html, body { color-scheme: light dark; }
+
+/* ---- Table tokens (light defaults) ---- */
+:root {
+  --tbl-bg:        var(--bg);
+  --tbl-head-bg:   #f6f8fb;
+  --tbl-row-alt:   #fafbfe;
+  --tbl-text:      var(--fg);
+  --tbl-muted:     var(--muted);
+  --tbl-border:    var(--border);
+
+  /* inline code chips used inside table cells */
+  --tbl-chip-bg:     #f6f8fa;
+  --tbl-chip-border: #e5e7eb;
+}
+
+/* ---- Dark overrides (you already toggle html[data-theme='dark']) ---- */
+html[data-theme='dark'] {
+  --tbl-bg:        #0f1115;
+  --tbl-head-bg:   #171a21;
+  --tbl-row-alt:   #12151b;
+  --tbl-text:      #e6e9ef;
+  --tbl-muted:     #b2b8c2;
+  --tbl-border:    #2a2f3a;
+
+  --tbl-chip-bg:     #1b1f28;
+  --tbl-chip-border: #2b3240;
+}
+
+/* ---- Table styling (scoped to post content) ---- */
+article.post table {
+  width: 100%;
+  border-collapse: separate;   /* preserves rounded corners */
+  border-spacing: 0;
+  background: var(--tbl-bg);
+  color: var(--tbl-text);
+  border: 1px solid var(--tbl-border);
+  border-radius: 10px;
+  overflow: hidden;            /* clip header radius */
+}
+
+article.post thead th {
+  background: var(--tbl-head-bg);
+  color: var(--tbl-text);
+  font-weight: 600;
+  border-bottom: 1px solid var(--tbl-border);
+}
+
+article.post th,
+article.post td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--tbl-border);
+  vertical-align: top;
+}
+
+article.post tbody tr:nth-child(even) { background: var(--tbl-row-alt); }
+article.post tbody tr:hover { background: rgba(255,255,255,0.03); } /* subtle; fine in light too */
+
+/* Inline code chips inside tables */
+article.post td code,
+article.post th code,
+article.post td kbd,
+article.post th kbd {
+  background: var(--tbl-chip-bg);
+  color: var(--tbl-text);
+  border: 1px solid var(--tbl-chip-border);
+  border-radius: 6px;
+  padding: .1em .35em;
+  font-size: .92em;
+}
+
+/* Optional: de-emphasize small text inside tables */
+article.post table small,
+article.post table .muted { color: var(--tbl-muted); }
+
