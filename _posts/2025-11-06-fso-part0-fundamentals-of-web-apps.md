@@ -29,6 +29,14 @@ Even though it is difficult to notice, the HTML page begins to render before the
     - `data.json` raw data (`xhr`, i.e. `XMLHttpRequest`)
 
 
+### Event handlers and callback functions
+Event handler functions are called callback functions. The application code does not invoke the functions itself, but the runtime environment - the browser - invokes the function at an appropriate time when the event has occurred.
+
+
+### Document Object Model (DOM)
+
+
+
 
 ### Readings
 - [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
