@@ -8,7 +8,7 @@ title: "React Hooks"
 To store and update reactive data in a component.
 
 **When it runs:**
-When the component renders (initially) and anytime the state updates.
+On **every render**. The setter from a previous render may schedule a new render when the state value changes, but renders can also be caused by new props, context changes, or parent renders.
 
 **Key idea:**
 Changing state triggers a re-render.
@@ -42,10 +42,10 @@ Examples of side effects:
 
 **When it runs:**
 
-Depends on the dependency array:
-- `[]` → run once on mount
-- `[count]` → run when count changes
-- (no array) → run on every render
+After React commits a render. The dependency array controls whether it runs **again**:
+- `[]` → run after the initial render; cleanup still runs on unmount
+- `[count]` → run after the initial render and again when `count` changes
+- (no array) → run after every render
 
 
 ```javascript
@@ -71,10 +71,11 @@ What happens in this example:
 2. React renders the component with the new `count` (this is the re-render)
 3. React commits the UI update to the screen
 4. After the render, React calls your effect → `document.title = ...`
+5. If the component re-renders again, React will run the cleanup (if provided) before the next effect, and it also runs cleanup on unmount.
 
-Important: 
+Important:
 - Updating `document.title` does not rerender the UI.
-- React only rerenders when you update React state with `setState`.
+- React can rerender because of state setters, new props, context updates, or parent renders.
 - Side effects like `document.title` do not trigger re-renders.
 
 Why updating the document title is a side effect (not rendering)?
@@ -110,7 +111,7 @@ These are impure because they affect the world outside the component. So updatin
 
 
 
-| Hook          | Purpose              | Runs When?                     |
-| ------------- | -------------------- | ------------------------------ |
-| **useState**  | Store internal state | On render + when state updates |
-| **useEffect** | Run side effects     | Based on dependency array      |
+| Hook          | Purpose              | Runs When?                                                |
+| ------------- | -------------------- | --------------------------------------------------------- |
+| **useState**  | Store internal state | On every render; setter schedules rerenders when value changes |
+| **useEffect** | Run side effects     | After render; reruns based on dependency array and cleans up on unmount |
