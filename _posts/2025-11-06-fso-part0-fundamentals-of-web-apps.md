@@ -34,8 +34,18 @@ Event handler functions are called callback functions. The application code does
 
 
 ### Document Object Model (DOM)
+The functioning of the browser is based on the idea of depicting HTML elements as a tree. Document Object Model, or DOM, is an Application Programming Interface (API) that enables programmatic modification of the element trees corresponding to web pages.
+The topmost node of the DOM tree of an HTML document is called the `document` object. We can perform various operations on a webpage using the DOM-API. You can access the document object by typing `document` into the Console tab.
 
+Manipulating the document object from console:
 
+```javascript
+list = document.getElementsByTagName('ul')[0]
+newElement = document.createElement('li')
+newElement.textContent = 'testing the page manipulation from console'
+list.appendChild(newElement)
+```
+Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server.
 
 
 ### Readings
