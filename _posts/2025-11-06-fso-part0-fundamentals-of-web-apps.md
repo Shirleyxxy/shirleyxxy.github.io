@@ -1,5 +1,6 @@
 ---
 title: "Fallstack Part 0.b: Fundamentals of Web Apps"
+date: 2025-11-22
 ---
 
 ## Fundamentals of Web Apps
