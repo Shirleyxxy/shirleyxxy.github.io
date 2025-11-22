@@ -1,6 +1,6 @@
 ---
 title: "Big Data Ecosystem"
-date: 2025-09-02
+sort_date: 2025-09-02
 ---
 
 ## What is Hive?

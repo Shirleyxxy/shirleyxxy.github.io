@@ -1,6 +1,6 @@
 ---
 title: "Batch Processing with Retry"
-date: 2025-09-22
+sort_date: 2025-09-22
 ---
 
 ## Retry-per-batch Approach
