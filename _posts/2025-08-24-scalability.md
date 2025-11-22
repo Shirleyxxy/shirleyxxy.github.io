@@ -1,5 +1,6 @@
 ---
 title: "Scalability"
+date: 2025-08-24
 ---
 
 ## Vertical Scaling vs Horizontal Scaling

@@ -1,5 +1,6 @@
 ---
 title: "Content Delivery Network"
+date: 2025-09-15
 ---
 
 ## What is CDN?
