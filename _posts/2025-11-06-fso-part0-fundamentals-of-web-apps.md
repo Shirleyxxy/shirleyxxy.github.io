@@ -13,7 +13,7 @@ The server and the web browser communicate with each other using the HTTP protoc
     - `General`: request URL, request method, status code
     - `Response Headers`: content length (bytes), content type (e.g. `text/html; charset=utf-8`)
 
-![Sequence diagram for browser-server communication](/assets/images/fso-part0-sequence-diagram.png)
+![Sequence diagram for browser-server communication](/assets/images/fso-part0-sequence-diagram-1.png)
 
 The sequence diagram visualizes how the browser and server are communicating over the time. The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
 
@@ -49,6 +49,21 @@ list.appendChild(newElement)
 ```
 Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server.
 
+
+### Loading a page containing JavaScript
+
+![Loading a page containing JavaScript](/assets/images/fso-part0-sequence-diagram-2.png)
+
+- The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request. 
+- Links in the HTML code cause the browser to also fetch the CSS style sheet `main.css` and the JavaScript code file `main.js`
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address `https://studies.cs.helsinki.fi/exampleapp/data.json`, which returns the notes as JSON data.
+- When the data has been fetched, the browser executes an event handler, which renders the notes to the page using the DOM-API.
+
+### Forms and HTTP POST
+![HTTP POST request to the server address new_note](/assets/images/fso-part0-request-initiator-chain.png)
+
+Surprisingly, submitting the form causes no fewer than five HTTP requests. The first one is the form submit event. It is an HTTP POST request to the server address `new_note`. The server responds with HTTP status code 302. This is a URL redirect, with which the server asks the browser to perform a new HTTP GET request to the address defined in the header's `Location` - the address `notes`.
+So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (`main.css`), the JavaScript code (`main.js`), and the raw data of the notes (`data.json`).
 
 ### Readings
 - [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
