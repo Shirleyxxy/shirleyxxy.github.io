@@ -1,7 +1,7 @@
 ---
 title: "Fallstack Part 0.b: Fundamentals of Web Apps"
-updated: 2025-11-29
-sort_date: 2025-11-29
+updated: 2025-11-30
+sort_date: 2025-11-30
 ---
 
 ## Fundamentals of Web Apps
@@ -64,6 +64,14 @@ Even though the page updates on your browser, the changes are not permanent. If 
 
 Surprisingly, submitting the form causes no fewer than five HTTP requests. The first one is the form submit event. It is an HTTP POST request to the server address `new_note`. The server responds with HTTP status code 302. This is a URL redirect, with which the server asks the browser to perform a new HTTP GET request to the address defined in the header's `Location` - the address `notes`.
 So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (`main.css`), the JavaScript code (`main.js`), and the raw data of the notes (`data.json`).
+
+### Single page app
+In recent years, the single-page application (SPA) style of creating web applications has emerged. SPA-style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
+
+The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server via the form's submit, and the server instructs the browser to reload the Notes page with a **redirect**.
+
+A single-page app version of our example application can be found at https://studies.cs.helsinki.fi/exampleapp/spa. At first glance, the application looks exactly the same as the previous one. The HTML code is almost identical, but the JavaScript file is different (`spa.js`) and there is a small change in how the form-tag is defined. The form has no action or method attributes to define how and where to send the input data. Open the `Network` tab and empty it. When you now create a new note, you'll notice that the browser sends only **one** request to the server. The POST request to the address `new_note_spa` contains the new note as JSON data containing both the content of the note (`content`) and the timestamp (`date`). The `Content-Type` header of the request tells the server that the included data is represented in JSON format. Without this header, the server would not know how to correctly parse the data. The server responds with **status code 201 created**. This time the server does not ask for a redirect, the browser stays on the same page, and it sends no further HTTP requests.
+
 
 ### Readings
 - [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
