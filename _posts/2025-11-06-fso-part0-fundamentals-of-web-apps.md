@@ -77,3 +77,4 @@ A single-page app version of our example application can be found at `https://st
 - [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 - [GET request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET)
 - [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+- [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Creating_the_content)
