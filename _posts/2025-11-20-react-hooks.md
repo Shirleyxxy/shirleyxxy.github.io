@@ -208,7 +208,8 @@ Mental model:
 
 #### The 3 legitimate use cases of `useRef`
 
-##### 1. Accessing DOM elements (most common)
+#### 1. Accessing DOM elements (most common)
+
 ```tsx
 const inputRef = useRef<HTMLInputElement>(null);
 
@@ -224,7 +225,7 @@ Why not state?
 - You don’t want a re-render when the DOM reference changes
 
 
-##### 2. Storing mutable values across renders (without re-render)
+#### 2. Storing mutable values across renders (without re-render)
 
 This is the most important conceptual use case.
 
@@ -247,7 +248,7 @@ Why `useRef` works here
 - Value survives re-renders
 - Updating it doesn’t cause another render loop
 
-##### 3. Escape hatch for non-React state
+#### 3. Escape hatch for non-React state
 
 Example: interval ID, timeout ID, external library instance
 ```tsx
