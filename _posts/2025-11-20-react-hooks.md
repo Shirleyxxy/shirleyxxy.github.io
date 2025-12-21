@@ -1,7 +1,7 @@
 ---
 title: "React Hooks"
-updated: 2025-11-20
-sort_date: 2025-11-20
+updated: 2025-12-20
+sort_date: 2025-12-20
 ---
 
 ### `useState`
@@ -117,3 +117,147 @@ These are impure because they affect the world outside the component. So updatin
 | ------------- | -------------------- | --------------------------------------------------------- |
 | **useState**  | Store internal state | On every render; setter schedules rerenders when value changes |
 | **useEffect** | Run side effects     | After render; reruns based on dependency array and cleans up on unmount |
+
+
+### `useMemo` - memoize values
+Purpose: Avoid expensive recalculations
+
+```tsx
+const filtered = useMemo(() => {
+  return items.filter(i => i.active);
+}, [items]);
+```
+
+Mental Model:
+> “Recompute this value only when dependencies change”
+
+In JavaScript, objects, arrays, and functions are compared by reference, not by value.
+React uses shallow comparison in many places:
+- `React.memo`
+- `useEffect` dependencies
+- `useCallback` / `useMemo` dependencies
+
+Shallow comparison means:
+>“Are these the same references as last time?”
+
+Without `useMemo`,
+```tsx
+const filtered = items.filter(i => i.active);
+```
+This creates a new array **on every render**.
+Even if:
+- `items` didn’t change
+- Filter result is identical
+
+`filtered` is a new reference every time.
+
+How `useMemo` fixes this:
+```tsx
+const filtered = useMemo(() => {
+  return items.filter(i => i.active);
+}, [items]);
+```
+Now:
+
+- If `items` is the same reference
+- React returns the same `filtered` reference
+
+Referential equality is preserved.
+
+Referential equality matters because React does shallow comparisons. `useMemo` preserves object identity so memoized components and effects don’t run unnecessarily.
+
+
+### `useCallback` – memoize functions
+
+Purpose: Prevent function identity changes
+
+```tsx
+const onClick = useCallback(() => {
+  setCount(c => c + 1);
+}, []);
+```
+
+Mental model:
+- Functions are recreated every render
+- `useCallback` keeps the same function reference
+
+Used with:
+- `React.memo`
+- Dependency-heavy child components
+
+### `useRef`
+
+#### What is useRef?
+
+```tsx
+const ref = useRef(initialValue);
+```
+
+`useRef` returns a stable object:
+```tsx
+{ current: initialValue }
+```
+
+Two core properties:
+- `ref.current` persists across renders
+- Updating `ref.current` does NOT trigger a re-render
+
+Mental model:
+> `useRef` = a mutable box that React ignores for rendering
+> `useRef` is for values React doesn’t need to know about
+
+#### The 3 legitimate use cases of `useRef`
+
+##### 1. Accessing DOM elements (most common)
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+<input ref={inputRef} />
+
+<button onClick={() => inputRef.current?.focus()}>
+  Focus
+</button>
+```
+Why not state?
+
+- DOM nodes don’t belong in React state
+- You don’t want a re-render when the DOM reference changes
+
+
+##### 2. Storing mutable values across renders (without re-render)
+
+This is the most important conceptual use case.
+
+Example: store previous value
+```tsx
+function Counter({ value }: { value: number }) {
+  const prev = useRef<number | null>(null);
+
+  useEffect(() => {
+    prev.current = value;
+  }, [value]);
+
+  return (
+    <p>Now: {value}, Before: {prev.current}</p>
+  );
+}
+```
+
+Why `useRef` works here
+- Value survives re-renders
+- Updating it doesn’t cause another render loop
+
+##### 3. Escape hatch for non-React state
+
+Example: interval ID, timeout ID, external library instance
+```tsx
+const intervalId = useRef<number | null>(null);
+
+useEffect(() => {
+  intervalId.current = window.setInterval(() => {
+    console.log("tick");
+  }, 1000);
+
+  return () => clearInterval(intervalId.current!);
+}, []);
+```

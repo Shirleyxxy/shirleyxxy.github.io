@@ -140,6 +140,3 @@ useEffect(() => {
 ```
 Components dispatch events, Redux owns the data, and `useSelector` subscribes components to specific state.
 It’s common to see `useEffect` and `useSelector` in the same component — `useEffect` controls when work happens, while `useSelector` controls what data the component depends on.
-
-
-
