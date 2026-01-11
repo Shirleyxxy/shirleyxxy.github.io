@@ -5,7 +5,7 @@ sort_date: 2026-01-10
 ---
 
 While learning React hooks, I focused a lot on what each hook does (`useEffect`, `useCallback`, etc.).
-But after working on a real client-facing React application with Redux, I realized that hooks are not just APIs — they form a data-flow architecture.
+But after working on a real client-facing React application with Redux, I realized that hooks are not just APIs — they form a **data-flow architecture**.
 
 ### 1. Redux State Must Be the Single Source of Truth
 
@@ -53,7 +53,7 @@ This avoids double ownership, race conditions, and stale UI bugs.
 ### 4. Dependency Arrays Are About Closure Correctness — Not Performance
 `useCallback` and `useEffect` dependencies are not “performance hints”.
 They define what version of state your function is allowed to see.
-If a handler reads `selectedSecurities`, it must depend on it — otherwise it becomes logically incorrect.
+If a handler reads `selectedSecurities`, it must include it in deps — otherwise it becomes logically incorrect.
 
 
 ### 5. Stable Dependencies Still Belong in the Dependency Array
@@ -79,4 +79,4 @@ Real systems have two directions:
 
 UI events dispatch → Redux updates → effect reconciles UI/ref.
 
-React Hooks are not just tools — they are data flow constraints. They enforce how data moves, who owns truth, and how UI stays consistent.
+React Hooks are not just tools — they are data-flow constraints. They enforce how data moves, who owns truth, and how UI stays consistent.
